@@ -1,0 +1,827 @@
+
+1. Bir arrayde sadece çift sayıları ekrana yazdıran bir program.
+
+#include <stdio.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 2 == 0) printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+2. Kullanıcıdan alınan bir arrayi ters çeviren bir program.
+
+#include <stdio.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    for (int i = size - 1; i >= 0; i--) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+3. Bir arraydeki elemanların karesini alarak yeni bir array oluşturun ve yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i] * arr[i]);
+    }
+    return 0;
+}
+
+4. Kullanıcının girdiği 10 sayıyı bir arrayde saklayın ve en büyük elemanı bulun.
+
+#include <stdio.h>
+
+int main() {
+    int arr[10], max;
+    for (int i = 0; i < 10; i++) scanf("%d", &arr[i]);
+    max = arr[0];
+    for (int i = 1; i < 10; i++) {
+        if (arr[i] > max) max = arr[i];
+    }
+    printf("%d\n", max);
+    return 0;
+}
+
+5. İki boyutlu bir matriste her satırın toplamını hesaplayan bir program.
+
+#include <stdio.h>
+
+int main() {
+    int mat[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    for (int i = 0; i < 2; i++) {
+        int sum = 0;
+        for (int j = 0; j < 3; j++) sum += mat[i][j];
+        printf("%d\n", sum);
+    }
+    return 0;
+}
+
+6. Bir arrayde belirli bir sayının kaç kez geçtiğini bulun.
+
+#include <stdio.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 2, 4, 2};
+    int size = 6, sayi = 2, count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == sayi) count++;
+    }
+    printf("%d\n", count);
+    return 0;
+}
+
+7. Kullanıcıdan bir dizi uzunluğu alın ve rastgele sayılarla bir array doldurun.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int arr[n];
+    srand(time(0));
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % 100;
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+8. İki array’in elemanlarını toplayarak üçüncü bir array oluşturun ve yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    int arr1[] = {1, 2, 3}, arr2[] = {4, 5, 6}, arr3[3];
+    for (int i = 0; i < 3; i++) {
+        arr3[i] = arr1[i] + arr2[i];
+        printf("%d ", arr3[i]);
+    }
+    return 0;
+}
+
+9. Verilen bir sayının karesini döndüren bir fonksiyon yazın.
+
+#include <stdio.h>
+
+int kare(int sayi) {
+    return sayi * sayi;
+}
+
+int main() {
+    int sayi = 5;
+    printf("%d\n", kare(sayi));
+    return 0;
+}
+
+10. İki sayı alıp toplamını ekrana yazdıran bir fonksiyon yazın.
+
+#include <stdio.h>
+
+int toplam(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int x, y;
+    scanf("%d %d", &x, &y);
+    printf("%d\n", toplam(x, y));
+    return 0;
+}
+11. Kullanıcıdan bir string alın ve bu stringin uzunluğunu bulan bir fonksiyon yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int uzunluk(char str[]) {
+    return strlen(str);
+}
+
+int main() {
+    char str[100];
+    scanf("%s", str);
+    printf("%d\n", uzunluk(str));
+    return 0;
+}
+
+12. Verilen bir sayının faktöriyelini hesaplayan bir fonksiyon yazın.
+
+#include <stdio.h>
+
+int faktoriyel(int n) {
+    int sonuc = 1;
+    for (int i = 1; i <= n; i++) {
+        sonuc *= i;
+    }
+    return sonuc;
+}
+
+int main() {
+    int sayi;
+    scanf("%d", &sayi);
+    printf("%d\n", faktoriyel(sayi));
+    return 0;
+}
+
+13. Verilen bir stringdeki belirli bir karakterin kaç kez geçtiğini bulan bir fonksiyon yazın.
+
+#include <stdio.h>
+
+int kacKezGeciyor(char str[], char ch) {
+    int count = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ch) count++;
+    }
+    return count;
+}
+
+int main() {
+    char str[100], ch;
+    scanf("%s %c", str, &ch);
+    printf("%d\n", kacKezGeciyor(str, ch));
+    return 0;
+}
+
+14. Pointer ile bir stringdeki tüm karakterleri ekrana yazdıran bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    char str[] = "Merhaba";
+    char *ptr = str;
+    while (*ptr) {
+        printf("%c", *ptr);
+        ptr++;
+    }
+    return 0;
+}
+
+15. Kullanıcıdan bir sayı alın ve bu sayının pozitif, negatif ya da sıfır olduğunu kontrol edin.
+
+#include <stdio.h>
+
+int main() {
+    int sayi;
+    scanf("%d", &sayi);
+    if (sayi > 0) printf("Pozitif\n");
+    else if (sayi < 0) printf("Negatif\n");
+    else printf("Sifir\n");
+    return 0;
+}
+
+16. Kullanıcıdan bir sayı alın ve 1’den bu sayıya kadar olan tüm sayıları ekrana yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    int sayi;
+    scanf("%d", &sayi);
+    for (int i = 1; i <= sayi; i++) {
+        printf("%d ", i);
+    }
+    return 0;
+}
+
+17. Kullanıcıdan bir sayı alın ve bu sayının asal olup olmadığını kontrol edin.
+
+#include <stdio.h>
+
+int asalMi(int n) {
+    if (n < 2) return 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}
+
+int main() {
+    int sayi;
+    scanf("%d", &sayi);
+    if (asalMi(sayi)) printf("Asal\n");
+    else printf("Asal degil\n");
+    return 0;
+}
+
+18. 1’den 100’e kadar olan tüm çift sayıları ekrana yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    for (int i = 2; i <= 100; i += 2) {
+        printf("%d ", i);
+    }
+    return 0;
+}
+
+19. Kullanıcıdan alınan bir sayının tersini bulun (örneğin: 1234 -> 4321).
+
+#include <stdio.h>
+
+int main() {
+    int sayi, ters = 0;
+    scanf("%d", &sayi);
+    while (sayi != 0) {
+        ters = ters * 10 + sayi % 10;
+        sayi /= 10;
+    }
+    printf("%d\n", ters);
+    return 0;
+}
+20. Kullanıcıdan bir kelime alın ve bu kelimeyi ters çeviren bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    scanf("%s", str);
+    int len = strlen(str);
+    for (int i = len - 1; i >= 0; i--) {
+        printf("%c", str[i]);
+    }
+    return 0;
+}
+
+21. Verilen bir stringin içindeki sesli harflerin sayısını bulan bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int count = 0;
+    scanf("%s", str);
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u' ||
+            str[i] == 'A' || str[i] == 'E' || str[i] == 'I' || str[i] == 'O' || str[i] == 'U') {
+            count++;
+        }
+    }
+    printf("%d\n", count);
+    return 0;
+}
+
+22. Kullanıcıdan alınan bir stringde büyük harfleri küçük harfe, küçük harfleri büyük harfe dönüştüren bir program yazın.
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[100];
+    scanf("%s", str);
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (islower(str[i])) printf("%c", toupper(str[i]));
+        else if (isupper(str[i])) printf("%c", tolower(str[i]));
+        else printf("%c", str[i]);
+    }
+    return 0;
+}
+
+23. Kullanıcıdan iki string alın ve bu stringleri birleştiren bir fonksiyon yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+void birlestir(char str1[], char str2[], char sonuc[]) {
+    strcpy(sonuc, str1);
+    strcat(sonuc, str2);
+}
+
+int main() {
+    char str1[50], str2[50], sonuc[100];
+    scanf("%s %s", str1, str2);
+    birlestir(str1, str2, sonuc);
+    printf("%s\n", sonuc);
+    return 0;
+}
+
+24. Bir cümledeki kelime sayısını bulan bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    int count = 1;
+    fgets(str, 100, stdin);
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ' ') count++;
+    }
+    printf("%d\n", count);
+    return 0;
+}
+
+25. Kullanıcıdan bir string alın ve içinde geçen belirli bir karakteri silen bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], ch;
+    scanf("%s %c", str, &ch);
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ch) printf("%c", str[i]);
+    }
+    return 0;
+}
+
+26. Bir stringi pointer kullanarak karakter karakter yazdıran bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    char str[] = "Merhaba";
+    char *ptr = str;
+    while (*ptr) {
+        printf("%c", *ptr);
+        ptr++;
+    }
+    return 0;
+}
+
+27. Bir stringin palindrome olup olmadığını kontrol eden bir fonksiyon yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int palindrome(char str[]) {
+    int len = strlen(str);
+    for (int i = 0; i < len / 2; i++) {
+        if (str[i] != str[len - 1 - i]) return 0;
+    }
+    return 1;
+}
+
+int main() {
+    char str[100];
+    scanf("%s", str);
+    if (palindrome(str)) printf("Palindrome\n");
+    else printf("Palindrome degil\n");
+    return 0;
+}
+
+28. Verilen bir stringde tekrar eden karakterleri bulan bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    int freq[256] = {0};
+    scanf("%s", str);
+    for (int i = 0; str[i] != '\0'; i++) freq[(int)str[i]]++;
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] > 1) printf("%c ", i);
+    }
+    return 0;
+}
+
+29. Bir stringdeki kelimeleri ters sırada yazdıran bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], *kelime[50];
+    int count = 0;
+    fgets(str, 100, stdin);
+    char *token = strtok(str, " ");
+    while (token) {
+        kelime[count++] = token;
+        token = strtok(NULL, " ");
+    }
+    for (int i = count - 1; i >= 0; i--) {
+        printf("%s ", kelime[i]);
+    }
+    return 0;
+}
+
+Döngü ve Mantık Soruları
+
+1. Kullanıcıdan bir sayı alın ve bu sayının Fibonacci serisini döngü ile hesaplayın.
+
+#include <stdio.h>
+
+int main() {
+    int n, a = 0, b = 1, c;
+    scanf("%d", &n);
+    printf("%d %d ", a, b);
+    for (int i = 2; i < n; i++) {
+        c = a + b;
+        printf("%d ", c);
+        a = b;
+        b = c;
+    }
+    return 0;
+}
+
+2. Kullanıcının girdiği sayıya kadar olan tüm mükemmel sayıları ekrana yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        int sum = 0;
+        for (int j = 1; j < i; j++) {
+            if (i % j == 0) sum += j;
+        }
+        if (sum == i) printf("%d ", i);
+    }
+    return 0;
+}
+
+3. 1’den 100’e kadar olan sayıları yazdırın, ancak:
+	•	3’ün katı olanlara “Fizz”,
+	•	5’in katı olanlara “Buzz”,
+	•	Her ikisinin katı olanlara “FizzBuzz” yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    for (int i = 1; i <= 100; i++) {
+        if (i % 15 == 0) printf("FizzBuzz ");
+        else if (i % 3 == 0) printf("Fizz ");
+        else if (i % 5 == 0) printf("Buzz ");
+        else printf("%d ", i);
+    }
+    return 0;
+}
+
+4. Kullanıcıdan bir sayı alın ve bu sayının Armstrong sayı olup olmadığını kontrol edin.
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n, temp, sum = 0, digit;
+    scanf("%d", &n);
+    temp = n;
+    while (temp != 0) {
+        digit = temp % 10;
+        sum += pow(digit, 3);
+        temp /= 10;
+    }
+    if (sum == n) printf("Armstrong\n");
+    else printf("Armstrong degil\n");
+    return 0;
+}
+
+5. Kullanıcıdan alınan bir sayının faktöriyelini hem döngü hem de recursive bir fonksiyon ile hesaplayın.
+
+Döngü ile:
+
+#include <stdio.h>
+
+int main() {
+    int n, sonuc = 1;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        sonuc *= i;
+    }
+    printf("%d\n", sonuc);
+    return 0;
+}
+
+Recursive ile:
+
+#include <stdio.h>
+
+int faktoriyel(int n) {
+    if (n == 0 || n == 1) return 1;
+    return n * faktoriyel(n - 1);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", faktoriyel(n));
+    return 0;
+}
+
+6. Kullanıcıdan iki sayı alın ve bu iki sayı arasındaki ortak bölenleri bulan bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    int a, b, min;
+    scanf("%d %d", &a, &b);
+    min = (a < b) ? a : b;
+    for (int i = 1; i <= min; i++) {
+        if (a % i == 0 && b % i == 0) printf("%d ", i);
+    }
+    return 0;
+}
+
+7. Kullanıcıdan bir sayı alın ve bu sayının rakamlarının toplamını bulun.
+
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0;
+    scanf("%d", &n);
+    while (n != 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+
+8. Bir döngü ile, kullanıcıdan sürekli sayı alın ve negatif bir sayı girildiğinde döngüyü sonlandırın.
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    while (1) {
+        scanf("%d", &n);
+        if (n < 0) break;
+    }
+    return 0;
+}
+
+9. Kullanıcıdan bir sayı alın ve bu sayının çarpım tablosunu yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    for (int i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\n", n, i, n * i);
+    }
+    return 0;
+}
+
+10. 1’den 1000’e kadar olan tüm asal sayıları ekrana yazdırın.
+
+#include <stdio.h>
+
+int main() {
+    for (int i = 2; i <= 1000; i++) {
+        int asal = 1;
+        for (int j = 2; j * j <= i; j++) {
+            if (i % j == 0) {
+                asal = 0;
+                break;
+            }
+        }
+        if (asal) printf("%d ", i);
+    }
+    return 0;
+}
+
+Struct ve Dosya İşlemleri
+
+1. Bir öğrenci struct’ı oluşturun (isim, numara, notlar). Bu struct ile bir öğrencinin bilgilerini dosyaya yazdıran bir program yazın.
+
+#include <stdio.h>
+
+struct Ogrenci {
+    char isim[50];
+    int numara;
+    float notlar;
+};
+
+int main() {
+    struct Ogrenci ogr = {"Ali", 123, 95.5};
+    FILE *dosya = fopen("ogrenci.txt", "w");
+    fprintf(dosya, "Isim: %s\nNumara: %d\nNotlar: %.2f\n", ogr.isim, ogr.numara, ogr.notlar);
+    fclose(dosya);
+    return 0;
+}
+
+2. Kullanıcıdan birden fazla ürün bilgisi (isim, fiyat, stok) alarak dosyaya yazan bir program yazın.
+
+#include <stdio.h>
+
+struct Urun {
+    char isim[50];
+    float fiyat;
+    int stok;
+};
+
+int main() {
+    struct Urun urunler[2];
+    FILE *dosya = fopen("urunler.txt", "w");
+    for (int i = 0; i < 2; i++) {
+        scanf("%s %f %d", urunler[i].isim, &urunler[i].fiyat, &urunler[i].stok);
+        fprintf(dosya, "Urun: %s Fiyat: %.2f Stok: %d\n", urunler[i].isim, urunler[i].fiyat, urunler[i].stok);
+    }
+    fclose(dosya);
+    return 0;
+}
+
+3. Bir dosyadan metin okuyup, kaç satır olduğunu bulan bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    FILE *dosya = fopen("metin.txt", "r");
+    char c;
+    int satir = 0;
+    while ((c = fgetc(dosya)) != EOF) {
+        if (c == '\n') satir++;
+    }
+    fclose(dosya);
+    printf("Satir sayisi: %d\n", satir);
+    return 0;
+}
+
+4. Bir dosyada geçen tüm kelimelerin sayısını bulan bir program yazın.
+
+#include <stdio.h>
+
+int main() {
+    FILE *dosya = fopen("metin.txt", "r");
+    char kelime[50];
+    int count = 0;
+    while (fscanf(dosya, "%s", kelime) != EOF) count++;
+    fclose(dosya);
+    printf("Kelime sayisi: %d\n", count);
+    return 0;
+}
+
+5. Bir tarih struct’ı oluşturun (gün, ay, yıl). İki tarih arasındaki farkı (gün olarak) hesaplayan bir program yazın.
+
+#include <stdio.h>
+
+struct Tarih {
+    int gun, ay, yil;
+};
+
+int farkHesapla(struct Tarih t1, struct Tarih t2) {
+    return (t2.yil - t1.yil) * 365 + (t2.ay - t1.ay) * 30 + (t2.gun - t1.gun);
+}
+
+int main() {
+    struct Tarih t1 = {1, 1, 2020}, t2 = {1, 1, 2023};
+    printf("Gun farki: %d\n", farkHesapla(t1, t2));
+    return 0;
+}
+
+6. Bir bankacılık uygulaması için müşteri struct’ı (isim, hesap numarası, bakiye) oluşturun. Birden fazla müşterinin bilgilerini dosyada saklayın.
+
+#include <stdio.h>
+
+struct Musteri {
+    char isim[50];
+    int hesapNo;
+    float bakiye;
+};
+
+int main() {
+    struct Musteri musteriler[2] = {{"Ahmet", 101, 1500.50}, {"Ayse", 102, 2500.75}};
+    FILE *dosya = fopen("musteriler.txt", "w");
+    for (int i = 0; i < 2; i++) {
+        fprintf(dosya, "Isim: %s Hesap No: %d Bakiye: %.2f\n", musteriler[i].isim, musteriler[i].hesapNo, musteriler[i].bakiye);
+    }
+    fclose(dosya);
+    return 0;
+}
+
+7. Kullanıcıdan bir metin alın ve her kelimenin ilk harfini büyük harf yapan bir program yazın.
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char metin[100];
+    fgets(metin, 100, stdin);
+    for (int i = 0; metin[i] != '\0'; i++) {
+        if (i == 0 || metin[i - 1] == ' ') {
+            metin[i] = toupper(metin[i]);
+        }
+    }
+    printf("%s", metin);
+    return 0;
+}
+
+8. Dinamik bellek kullanarak bir struct listesi oluşturun. Bu listede kullanıcıdan alınan bilgileri saklayın ve sıralayın.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Kisi {
+    char isim[50];
+    int yas;
+};
+
+int compare(const void *a, const void *b) {
+    return strcmp(((struct Kisi *)a)->isim, ((struct Kisi *)b)->isim);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    struct Kisi *kisiler = (struct Kisi *)malloc(n * sizeof(struct Kisi));
+    for (int i = 0; i < n; i++) {
+        scanf("%s %d", kisiler[i].isim, &kisiler[i].yas);
+    }
+    qsort(kisiler, n, sizeof(struct Kisi), compare);
+    for (int i = 0; i < n; i++) {
+        printf("%s %d\n", kisiler[i].isim, kisiler[i].yas);
+    }
+    free(kisiler);
+    return 0;
+}
+
+9. Dosyadan bir metin okuyup, içinde geçen belirli bir kelimenin kaç kez tekrar ettiğini bulan bir program yazın.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    FILE *dosya = fopen("metin.txt", "r");
+    char kelime[50], hedef[50];
+    int count = 0;
+    scanf("%s", hedef);
+    while (fscanf(dosya, "%s", kelime) != EOF) {
+        if (strcmp(kelime, hedef) == 0) count++;
+    }
+    fclose(dosya);
+    printf("%d\n", count);
+    return 0;
+}
+
+10. Struct ile bir “kütüphane sistemi” oluşturun. Kitap bilgilerini (isim, yazar, yıl) kaydedin ve kitapları sıralayın.
+
+#include <stdio.h>
+#include <string.h>
+
+struct Kitap {
+    char isim[50];
+    char yazar[50];
+    int yil;
+};
+
+int compare(const void *a, const void *b) {
+    return strcmp(((struct Kitap *)a)->isim, ((struct Kitap *)b)->isim);
+}
+
+int main() {
+    struct Kitap kitaplar[3] = {{"C", "Dennis", 1978}, {"Python", "Guido", 1991}, {"Java", "James", 1995}};
+    qsort(kitaplar, 3, sizeof(struct Kitap), compare);
+    for (int i = 0; i < 3; i++) {
+        printf("%s %s %d\n", kitaplar[i].isim, kitaplar[i].yazar, kitaplar[i].yil);
+    }
+    return 0;
+}
+
+SOLVE Question.
+
+
