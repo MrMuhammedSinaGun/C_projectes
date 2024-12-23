@@ -1,0 +1,288 @@
+#include <stdio.h>
+#include <math.h>
+
+// Fonksiyon bildirimleri
+void toplama();
+void cikarma();
+void carpma();
+void bolme();
+void karekok();
+void usAlma();
+void faktoriyel();
+void sinus();
+void cosinus();
+void logaritma();
+void dogruYuvarla();
+void istatistik();
+void menu();
+void hataMesaji();
+void bekle();
+void temizle();
+
+int main() {
+    menu();
+    return 0;
+}
+
+// Toplama fonksiyonu
+void toplama() {
+    double sayi1, sayi2, sonuc;
+    printf("Birinci sayiyi giriniz: ");
+    scanf("%lf", &sayi1);
+    printf("Ikinci sayiyi giriniz: ");
+    scanf("%lf", &sayi2);
+
+    sonuc = sayi1 + sayi2;
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Çıkarma fonksiyonu
+void cikarma() {
+    double sayi1, sayi2, sonuc;
+    printf("Birinci sayiyi giriniz: ");
+    scanf("%lf", &sayi1);
+    printf("Ikinci sayiyi giriniz: ");
+    scanf("%lf", &sayi2);
+
+    sonuc = sayi1 - sayi2;
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Çarpma fonksiyonu
+void carpma() {
+    double sayi1, sayi2, sonuc;
+    printf("Birinci sayiyi giriniz: ");
+    scanf("%lf", &sayi1);
+    printf("Ikinci sayiyi giriniz: ");
+    scanf("%lf", &sayi2);
+
+    sonuc = sayi1 * sayi2;
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Bölme fonksiyonu
+void bolme() {
+    double sayi1, sayi2, sonuc;
+    printf("Birinci sayiyi giriniz: ");
+    scanf("%lf", &sayi1);
+    printf("Ikinci sayiyi giriniz: ");
+    scanf("%lf", &sayi2);
+
+    if (sayi2 == 0) {
+        printf("Hata: 0'a bolme yapilamaz.\n");
+    } else {
+        sonuc = sayi1 / sayi2;
+        printf("Sonuc: %.2lf\n", sonuc);
+    }
+
+    bekle();
+}
+
+// Karekök hesaplama fonksiyonu
+void karekok() {
+    double sayi, sonuc;
+    printf("Bir sayi giriniz: ");
+    scanf("%lf", &sayi);
+
+    if (sayi < 0) {
+        printf("Hata: Negatif sayilarin karekoku hesaplanamaz.\n");
+    } else {
+        sonuc = sqrt(sayi);
+        printf("Sonuc: %.2lf\n", sonuc);
+    }
+
+    bekle();
+}
+
+// Üs alma fonksiyonu
+void usAlma() {
+    double taban, us, sonuc;
+    printf("Taban degerini giriniz: ");
+    scanf("%lf", &taban);
+    printf("Us degerini giriniz: ");
+    scanf("%lf", &us);
+
+    sonuc = pow(taban, us);
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Faktöriyel hesaplama fonksiyonu
+void faktoriyel() {
+    int sayi, sonuc = 1;
+    printf("Pozitif bir tam sayi giriniz: ");
+    scanf("%d", &sayi);
+
+    if (sayi < 0) {
+        printf("Hata: Negatif sayilarin faktoriyeli hesaplanamaz.\n");
+    } else {
+        for (int i = 1; i <= sayi; i++) {
+            sonuc *= i;
+        }
+        printf("Sonuc: %d\n", sonuc);
+    }
+
+    bekle();
+}
+
+// Sinüs hesaplama fonksiyonu
+void sinus() {
+    double derece, radyan, sonuc;
+    printf("Bir aci (derece cinsinden) giriniz: ");
+    scanf("%lf", &derece);
+
+    radyan = derece * (3.14159 / 180);
+    sonuc = sin(radyan);
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Kosinüs hesaplama fonksiyonu
+void cosinus() {
+    double derece, radyan, sonuc;
+    printf("Bir aci (derece cinsinden) giriniz: ");
+    scanf("%lf", &derece);
+
+    radyan = derece * (3.14159 / 180);
+    sonuc = cos(radyan);
+    printf("Sonuc: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// Logaritma fonksiyonu
+void logaritma() {
+    double sayi, sonuc;
+    printf("Logaritmasi alinacak sayiyi giriniz: ");
+    scanf("%lf", &sayi);
+
+    if (sayi <= 0) {
+        printf("Hata: Logaritma pozitif sayilar icin hesaplanabilir.\n");
+    } else {
+        sonuc = log10(sayi);
+        printf("Sonuc: %.2lf\n", sonuc);
+    }
+
+    bekle();
+}
+
+// Doğru yuvarlama fonksiyonu
+void dogruYuvarla() {
+    double sayi, sonuc;
+    printf("Yuvarlanacak sayiyi giriniz: ");
+    scanf("%lf", &sayi);
+
+    sonuc = round(sayi);
+    printf("Yuvarlanmis deger: %.2lf\n", sonuc);
+
+    bekle();
+}
+
+// İstatistik hesaplama fonksiyonu
+void istatistik() {
+    int n;
+    printf("Kac adet sayi gireceksiniz?: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Hata: En az bir sayi girilmelidir.\n");
+    } else {
+        double sayilar[n], toplam = 0, ortalama, min, max;
+
+        printf("Sayilari giriniz:\n");
+        for (int i = 0; i < n; i++) {
+            printf("%d. sayi: ", i + 1);
+            scanf("%lf", &sayilar[i]);
+            toplam += sayilar[i];
+
+            if (i == 0) {
+                min = max = sayilar[i];
+            } else {
+                if (sayilar[i] < min) min = sayilar[i];
+                if (sayilar[i] > max) max = sayilar[i];
+            }
+        }
+
+        ortalama = toplam / n;
+
+        printf("\nIstatistikler:\n");
+        printf("Toplam: %.2lf\n", toplam);
+        printf("Ortalama: %.2lf\n", ortalama);
+        printf("En kucuk deger: %.2lf\n", min);
+        printf("En buyuk deger: %.2lf\n", max);
+    }
+
+    bekle();
+}
+
+// Menü fonksiyonu
+void menu() {
+    int secim;
+
+    do {
+        temizle();
+        printf("HESAP MAKINESI MENUSU\n");
+        printf("1. Toplama\n");
+        printf("2. Cikarma\n");
+        printf("3. Carpma\n");
+        printf("4. Bolme\n");
+        printf("5. Karekök\n");
+        printf("6. Üs Alma\n");
+        printf("7. Faktöriyel\n");
+        printf("8. Sinüs\n");
+        printf("9. Kosinüs\n");
+        printf("10. Logaritma (Taban 10)\n");
+        printf("11. Dogru Yuvarlama\n");
+        printf("12. Temel Istatistik\n");
+        printf("0. Cikis\n");
+        printf("Seciminizi giriniz: ");
+        scanf("%d", &secim);
+
+        switch (secim) {
+            case 1: toplama(); break;
+            case 2: cikarma(); break;
+            case 3: carpma(); break;
+            case 4: bolme(); break;
+            case 5: karekok(); break;
+            case 6: usAlma(); break;
+            case 7: faktoriyel(); break;
+            case 8: sinus(); break;
+            case 9: cosinus(); break;
+            case 10: logaritma(); break;
+            case 11: dogruYuvarla(); break;
+            case 12: istatistik(); break;
+            case 0: printf("Programdan cikiliyor...\n"); break;
+            default: hataMesaji(); break;
+        }
+    } while (secim != 0);
+}
+
+// Hata mesajı fonksiyonu
+void hataMesaji() {
+    printf("Gecersiz bir secim yaptiniz. Lutfen tekrar deneyiniz.\n");
+    bekle();
+}
+
+// Bekleme fonksiyonu
+void bekle() {
+    printf("Devam etmek icin bir tusa basin...\n");
+    getchar();
+    getchar();
+}
+
+// Temizleme fonksiyonu
+void temizle() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
