@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_HESAP 100 // Maksimum hesap sayısı
+
+// Hesap yapısı
+typedef struct {
+    int hesapNumarasi;
+    char isim[50];
+    double bakiye;
+} Hesap;
+
+// Fonksiyon bildirimleri
+void hesapOlustur();
+void paraYatir();
+void paraCek();
+void bakiyeSorgula();
+void hesaplariListele();
+void menu();
+
+// Global değişkenler
+Hesap hesaplar[MAX_HESAP];
+int toplamHesap = 0;
+
+int main() {
+    menu();
+    return 0;
+}
+
+// Menü fonksiyonu
+void menu() {
+    int secim;
+
+    do {
+        printf("\n==== BANKA SISTEMI ====\n");
+        printf("1. Hesap Olustur\n");
+        printf("2. Para Yatir\n");
+        printf("3. Para Cek\n");
+        printf("4. Bakiye Sorgula\n");
+        printf("5. Hesaplari Listele\n");
+        printf("0. Cikis\n");
+        printf("Seciminizi giriniz: ");
+        scanf("%d", &secim);
+
+        switch (secim) {
+            case 1: hesapOlustur(); break;
+            case 2: paraYatir(); break;
+            case 3: paraCek(); break;
+            case 4: bakiyeSorgula(); break;
+            case 5: hesaplariListele(); break;
+            case 0: printf("Programdan cikiliyor...\n"); break;
+            default: printf("Gecersiz bir secim yaptiniz. Lutfen tekrar deneyin.\n");
+        }
+    } while (secim != 0);
+}
+
+// Hesap oluşturma fonksiyonu
+void hesapOlustur() {
+    if (toplamHesap >= MAX_HESAP) {
+        printf("Maksimum hesap sayisina ulasildi. Yeni hesap olusturulamiyor.\n");
+        return;
+    }
+
+    Hesap yeniHesap;
+    yeniHesap.hesapNumarasi = toplamHesap + 1; // Hesap numarası otomatik atanır
+
+    printf("Isim giriniz: ");
+    scanf(" %[^\n]", yeniHesap.isim); // Kullanıcı adı alınır (boşlukları destekler)
+    yeniHesap.bakiye = 0; // Yeni hesap başlangıçta 0 bakiye ile oluşturulur
+
+    hesaplar[toplamHesap++] = yeniHesap;
+
+    printf("Hesap basariyla olusturuldu. Hesap Numaraniz: %d\n", yeniHesap.hesapNumarasi);
+}
+
+// Para yatırma fonksiyonu
+void paraYatir() {
+    int hesapNo;
+    double miktar;
+
+    printf("Hesap numarasini giriniz: ");
+    scanf("%d", &hesapNo);
+
+    if (hesapNo < 1 || hesapNo > toplamHesap) {
+        printf("Gecersiz hesap numarasi.\n");
+        return;
+    }
+
+    printf("Yatirilacak miktari giriniz: ");
+    scanf("%lf", &miktar);
+
+    if (miktar <= 0) {
+        printf("Gecersiz miktar. Lutfen pozitif bir deger giriniz.\n");
+        return;
+    }
+
+    hesaplar[hesapNo - 1].bakiye += miktar; // Bakiyeye ekleme yapılır
+    printf("Para yatirma basarili. Yeni bakiyeniz: %.2lf\n", hesaplar[hesapNo - 1].bakiye);
+}
+
+// Para çekme fonksiyonu
+void paraCek() {
+    int hesapNo;
+    double miktar;
+
+    printf("Hesap numarasini giriniz: ");
+    scanf("%d", &hesapNo);
+
+    if (hesapNo < 1 || hesapNo > toplamHesap) {
+        printf("Gecersiz hesap numarasi.\n");
+        return;
+    }
+
+    printf("Cekilecek miktari giriniz: ");
+    scanf("%lf", &miktar);
+
+    if (miktar <= 0) {
+        printf("Gecersiz miktar. Lutfen pozitif bir deger giriniz.\n");
+        return;
+    }
+
+    if (miktar > hesaplar[hesapNo - 1].bakiye) {
+        printf("Yetersiz bakiye. Mevcut bakiye: %.2lf\n", hesaplar[hesapNo - 1].bakiye);
+        return;
+    }
+
+    hesaplar[hesapNo - 1].bakiye -= miktar; // Bakiyeden düşme yapılır
+    printf("Para cekme basarili. Yeni bakiyeniz: %.2lf\n", hesaplar[hesapNo - 1].bakiye);
+}
+
+// Bakiye sorgulama fonksiyonu
+void bakiyeSorgula() {
+    int hesapNo;
+
+    printf("Hesap numarasini giriniz: ");
+    scanf("%d", &hesapNo);
+
+    if (hesapNo < 1 || hesapNo > toplamHesap) {
+        printf("Gecersiz hesap numarasi.\n");
+        return;
+    }
+
+    printf("Hesap Numaraniz: %d\n", hesaplar[hesapNo - 1].hesapNumarasi);
+    printf("Hesap Sahibinin Adi: %s\n", hesaplar[hesapNo - 1].isim);
+    printf("Bakiyeniz: %.2lf\n", hesaplar[hesapNo - 1].bakiye);
+}
+
+// Hesapları listeleme fonksiyonu
+void hesaplariListele() {
+    if (toplamHesap == 0) {
+        printf("Henuz hic hesap olusturulmadi.\n");
+        return;
+    }
+
+    printf("\n==== TUM HESAPLAR ====\n");
+    for (int i = 0; i < toplamHesap; i++) {
+        printf("Hesap No: %d, Isim: %s, Bakiye: %.2lf\n",
+               hesaplar[i].hesapNumarasi,
+               hesaplar[i].isim,
+               hesaplar[i].bakiye);
+    }
+    printf("======================\n");
+}
