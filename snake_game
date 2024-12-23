@@ -1,1 +1,153 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+
+#define WIDTH 20
+#define HEIGHT 20
+#define INITIAL_SNAKE_LENGTH 3
+
+// Direction enums
+typedef enum { STOP = 0, LEFT, RIGHT, UP, DOWN } Direction;
+
+// Global variables
+int gameOver;
+int score;
+int snakeX[WIDTH * HEIGHT], snakeY[WIDTH * HEIGHT];
+int snakeLength;
+int foodX, foodY;
+Direction dir;
+
+void Setup() {
+    gameOver = 0;
+    score = 0;
+    snakeLength = INITIAL_SNAKE_LENGTH;
+    
+    // Initialize snake position
+    snakeX[0] = WIDTH / 2;
+    snakeY[0] = HEIGHT / 2;
+
+    // Generate initial food position
+    foodX = rand() % WIDTH;
+    foodY = rand() % HEIGHT;
+
+    dir = STOP;
+}
+
+void Draw() {
+    system("cls"); // Clear console
+
+    // Top border
+    for (int i = 0; i < WIDTH + 2; i++)
+        printf("#");
+    printf("\n");
+
+    // Field
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if (j == 0)
+                printf("#"); // Left border
+
+            if (i == foodY && j == foodX)
+                printf("F"); // Food
+            else {
+                int print = 0;
+                for (int k = 0; k < snakeLength; k++) {
+                    if (snakeX[k] == j && snakeY[k] == i) {
+                        printf("O"); // Snake body
+                        print = 1;
+                    }
+                }
+                if (!print)
+                    printf(" ");
+            }
+
+            if (j == WIDTH - 1)
+                printf("#"); // Right border
+        }
+        printf("\n");
+    }
+
+    // Bottom border
+    for (int i = 0; i < WIDTH + 2; i++)
+        printf("#");
+    printf("\n");
+
+    printf("Score: %d\n", score);
+}
+
+void Input() {
+    if (_kbhit()) {
+        switch (_getch()) {
+        case 'a':
+            if (dir != RIGHT)
+                dir = LEFT;
+            break;
+        case 'd':
+            if (dir != LEFT)
+                dir = RIGHT;
+            break;
+        case 'w':
+            if (dir != DOWN)
+                dir = UP;
+            break;
+        case 's':
+            if (dir != UP)
+                dir = DOWN;
+            break;
+        case 'x':
+            gameOver = 1;
+            break;
+        }
+    }
+}
+
+void Logic() {
+    int prevX = snakeX[0];
+    int prevY = snakeY[0];
+    int prev2X, prev2Y;
+    snakeX[0] += (dir == RIGHT) - (dir == LEFT);
+    snakeY[0] += (dir == DOWN) - (dir == UP);
+
+    for (int i = 1; i < snakeLength; i++) {
+        prev2X = snakeX[i];
+        prev2Y = snakeY[i];
+        snakeX[i] = prevX;
+        snakeY[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+    }
+
+    // Collision with walls
+    if (snakeX[0] >= WIDTH || snakeX[0] < 0 || snakeY[0] >= HEIGHT || snakeY[0] < 0)
+        gameOver = 1;
+
+    // Collision with itself
+    for (int i = 1; i < snakeLength; i++) {
+        if (snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i])
+            gameOver = 1;
+    }
+
+    // Eating food
+    if (snakeX[0] == foodX && snakeY[0] == foodY) {
+        score += 10;
+        snakeLength++;
+        foodX = rand() % WIDTH;
+        foodY = rand() % HEIGHT;
+    }
+}
+
+int main() {
+    srand(time(0));
+    Setup();
+    while (!gameOver) {
+        Draw();
+        Input();
+        Logic();
+        _sleep(100); // Game speed
+    }
+    printf("Game Over!\n");
+    printf("Final Score: %d\n", score);
+    return 0;
+}
 
