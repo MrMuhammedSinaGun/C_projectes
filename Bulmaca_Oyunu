@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Fonksiyon bildirimi
+void oyunBaslat();
+void istatistikGoster();
+
+// İstatistik değişkenleri
+int toplamOyunSayisi = 0;
+int toplamTahminSayisi = 0;
+int enIyiSkor = 1000; // En az tahminle kazanma için başlangıç değeri yüksek tutulur
+
+int main() {
+    int secim;
+
+    do {
+        // Ana menü
+        printf("\n==== SAYI TAHMIN OYUNU ====\n");
+        printf("1. Oyunu Baslat\n");
+        printf("2. Istatistikleri Goster\n");
+        printf("0. Cikis\n");
+        printf("Seciminizi giriniz: ");
+        scanf("%d", &secim);
+
+        // Kullanıcı seçimine göre işlem yap
+        switch (secim) {
+            case 1:
+                oyunBaslat();
+                break;
+            case 2:
+                istatistikGoster();
+                break;
+            case 0:
+                printf("Oyun kapatiliyor...\n");
+                break;
+            default:
+                printf("Hatali giris yaptiniz. Lutfen tekrar deneyiniz.\n");
+        }
+    } while (secim != 0);
+
+    return 0;
+}
+
+// Oyunun ana fonksiyonu
+void oyunBaslat() {
+    int gizliSayi, tahmin, tahminSayisi = 0, min = 1, max = 100;
+
+    // Rastgele sayı üretimi
+    srand(time(0));
+    gizliSayi = (rand() % (max - min + 1)) + min; // 1-100 arası sayı üret
+
+    printf("\n1 ile 100 arasinda bir sayi tuttum. Bakalim bulabilecek misin?\n");
+
+    do {
+        printf("Tahmininiz: ");
+        scanf("%d", &tahmin);
+
+        // Tahmin sayısını artır
+        tahminSayisi++;
+
+        // Kullanıcı girdisine göre yönlendirme
+        if (tahmin < gizliSayi) {
+            printf("Daha buyuk bir sayi girin.\n");
+        } else if (tahmin > gizliSayi) {
+            printf("Daha kucuk bir sayi girin.\n");
+        } else {
+            // Doğru tahmin
+            printf("Tebrikler! %d tahminde dogru cevabi buldunuz: %d\n", tahminSayisi, gizliSayi);
+        }
+
+    } while (tahmin != gizliSayi);
+
+    // İstatistikleri güncelle
+    toplamOyunSayisi++;
+    toplamTahminSayisi += tahminSayisi;
+
+    if (tahminSayisi < enIyiSkor) {
+        enIyiSkor = tahminSayisi; // En iyi skoru güncelle
+    }
+}
+
+// İstatistik gösterme fonksiyonu
+void istatistikGoster() {
+    printf("\n==== ISTATISTIKLER ====\n");
+
+    if (toplamOyunSayisi == 0) {
+        printf("Henuz hic oyun oynanmadi.\n");
+    } else {
+        double ortalamaTahmin = (double)toplamTahminSayisi / toplamOyunSayisi;
+
+        printf("Toplam Oynanan Oyun: %d\n", toplamOyunSayisi);
+        printf("Toplam Yapilan Tahmin: %d\n", toplamTahminSayisi);
+        printf("Ortalama Tahmin Sayisi: %.2lf\n", ortalamaTahmin);
+        printf("En Iyi Skor (En Az Tahmin): %d\n", enIyiSkor);
+    }
+    printf("=======================\n");
+}
